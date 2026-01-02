@@ -8,7 +8,6 @@ export default function Home() {
       <Section padding="small" container="large" className="flex-1 flex flex-col justify-center">
         <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
           <div className="flex flex-col gap-4">
-
             <Text variant="h1" className="text-black dark:text-zinc-50">
               Are we in your neighborhood?
             </Text>
@@ -16,7 +15,6 @@ export default function Home() {
               We bring premium cleaning to homes within 40 miles of downtown Tulsa. Enter your address to see if you qualify for a spot.
             </Text>
           </div>
-          
           <DistanceCalculator />
         </div>
       </Section>

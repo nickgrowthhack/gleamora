@@ -1,0 +1,17 @@
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--leading);
+}
+
+p {
+  max-width: var(--reading-max);
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
