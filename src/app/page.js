@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DistanceCalculator from "@/components/distance-calculator";
 import ServiceDetails from "@/components/service-details";
 import Schedule from "@/components/schedule";
@@ -25,18 +25,28 @@ export default function Home() {
   });
   const [isStepValid, setIsStepValid] = useState(false);
 
+  // Re-validate when stepping into a new step to prevent invalid state
+  useEffect(() => {
+    if (step === 1) {
+        setIsStepValid(!!formData.address?.valid);
+    } else if (step === 2) {
+        // Placeholder validation for step 2 (currently always valid)
+        setIsStepValid(true);
+    } else if (step === 3) {
+        // Validate that a date is selected for step 3
+        setIsStepValid(!!formData.schedule?.date);
+    }
+  }, [step, formData]);
+
+
   const nextStep = () => {
     if (isStepValid) {
         setStep((prev) => Math.min(prev + 1, 3));
-        // Reset validation for next step, unless we have logic to check existing data immediately
-        // For simplicity, we might need to re-validate when component mounts or data updates
-        setIsStepValid(true); // Default to true for empty steps 2 and 3 for now
     }
   };
   
   const prevStep = () => {
       setStep((prev) => Math.max(prev - 1, 1));
-      setIsStepValid(true); // Assuming going back is always allowed/valid state for previous steps
   };
 
   const handleAddressSelect = (data) => {
@@ -51,9 +61,8 @@ export default function Home() {
   };
 
   const handleScheduleUpdate = (data) => {
-      // Placeholder for future logic
       setFormData(prev => ({ ...prev, schedule: data }));
-      setIsStepValid(true);
+      setIsStepValid(!!data.date);
   };
 
   return (
@@ -69,7 +78,7 @@ export default function Home() {
                   <BreadcrumbPage className="font-bold text-primary">Home Address</BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink 
-                    onClick={() => { setStep(1); setIsStepValid(!!formData.address?.valid); }} 
+                    onClick={() => setStep(1)} 
                     className="cursor-pointer"
                   >
                     Home Address
