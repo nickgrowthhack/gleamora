@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <Section padding="small" container="large" className="flex-1 flex flex-col justify-center">
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
           <div className="flex flex-col gap-4">
 
             <Text variant="h1" className="text-black dark:text-zinc-50">
