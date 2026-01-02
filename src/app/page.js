@@ -18,9 +18,43 @@ import {
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    address: null,
+    serviceDetails: {},
+    schedule: {}
+  });
+  const [isStepValid, setIsStepValid] = useState(false);
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
-  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+  const nextStep = () => {
+    if (isStepValid) {
+        setStep((prev) => Math.min(prev + 1, 3));
+        // Reset validation for next step, unless we have logic to check existing data immediately
+        // For simplicity, we might need to re-validate when component mounts or data updates
+        setIsStepValid(true); // Default to true for empty steps 2 and 3 for now
+    }
+  };
+  
+  const prevStep = () => {
+      setStep((prev) => Math.max(prev - 1, 1));
+      setIsStepValid(true); // Assuming going back is always allowed/valid state for previous steps
+  };
+
+  const handleAddressSelect = (data) => {
+    setFormData(prev => ({ ...prev, address: data }));
+    setIsStepValid(data.valid);
+  };
+
+  const handleServiceDetailsUpdate = (data) => {
+      // Placeholder for future logic
+      setFormData(prev => ({ ...prev, serviceDetails: data }));
+      setIsStepValid(true); 
+  };
+
+  const handleScheduleUpdate = (data) => {
+      // Placeholder for future logic
+      setFormData(prev => ({ ...prev, schedule: data }));
+      setIsStepValid(true);
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black">
@@ -34,7 +68,12 @@ export default function Home() {
                 {step === 1 ? (
                   <BreadcrumbPage className="font-bold text-primary">Home Address</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink onClick={() => setStep(1)} className="cursor-pointer">Home Address</BreadcrumbLink>
+                  <BreadcrumbLink 
+                    onClick={() => { setStep(1); setIsStepValid(!!formData.address?.valid); }} 
+                    className="cursor-pointer"
+                  >
+                    Home Address
+                  </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -42,7 +81,12 @@ export default function Home() {
                 {step === 2 ? (
                   <BreadcrumbPage className="font-bold text-primary">Service Details</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink onClick={() => setStep(2)} className="cursor-pointer">Service Details</BreadcrumbLink>
+                  <BreadcrumbLink 
+                    onClick={() => { if (step > 2) setStep(2); }} // Only allow clicking back to 2 if on 3
+                    className={`cursor-pointer ${step < 2 ? 'pointer-events-none opacity-50' : ''}`}
+                  >
+                    Service Details
+                  </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -50,7 +94,7 @@ export default function Home() {
                  {step === 3 ? (
                   <BreadcrumbPage className="font-bold text-primary">Schedule</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink onClick={() => setStep(3)} className="cursor-pointer">Schedule</BreadcrumbLink>
+                  <BreadcrumbLink className="cursor-not-allowed opacity-50">Schedule</BreadcrumbLink>
                 )}
               </BreadcrumbItem>
             </BreadcrumbList>
@@ -69,13 +113,26 @@ export default function Home() {
                       We bring premium cleaning to homes within 40 miles of downtown Tulsa. Enter your address to see if you qualify for a spot.
                     </Text>
                   </div>
-                  <DistanceCalculator />
+                  <DistanceCalculator 
+                    onAddressSelect={handleAddressSelect} 
+                    initialAddress={formData.address?.address}
+                  />
                 </div>
             )}
             
-            {step === 2 && <ServiceDetails />}
+            {step === 2 && (
+                <ServiceDetails 
+                    data={formData.serviceDetails} 
+                    updateData={handleServiceDetailsUpdate} 
+                />
+            )}
             
-            {step === 3 && <Schedule />}
+            {step === 3 && (
+                <Schedule 
+                    data={formData.schedule} 
+                    updateData={handleScheduleUpdate} 
+                />
+            )}
         </div>
 
         {/* Navigation Buttons */}
@@ -83,8 +140,9 @@ export default function Home() {
             <Button variant="outline" onClick={prevStep} disabled={step === 1}>
                 Back
             </Button>
-            <Button onClick={nextStep} disabled={step === 3}>
-                Next
+            
+            <Button onClick={nextStep} disabled={!isStepValid}>
+                {step === 1 ? "Get My Instant Quote" : step === 3 ? "Finish" : "Next"}
             </Button>
         </div>
 

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
 import { MapPin, AlertCircle, CheckCircle } from 'lucide-react'
 import { calculateHaversineDistance } from '@/lib/utils'
@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 const TULSA_COORDS = { lat: 36.1540, lng: -95.9928 }
 const LIBRARIES = ['places']
 
-export default function DistanceCalculator() {
+export default function DistanceCalculator({ onAddressSelect, initialAddress }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: LIBRARIES
@@ -17,8 +17,22 @@ export default function DistanceCalculator() {
 
   const [distance, setDistance] = useState(null)
   const [error, setError] = useState(null)
-  const [selectedAddress, setSelectedAddress] = useState('')
+  const [selectedAddress, setSelectedAddress] = useState(initialAddress || '')
   const autocompleteRef = useRef(null)
+
+  // Validate initial address if provided
+  useEffect(() => {
+    if (initialAddress) {
+       setSelectedAddress(initialAddress)
+       // We don't re-calculate distance here as we assume if it's passed back it was valid, 
+       // or we could store distance in parent too. 
+       // For now, let's just ensure the input is populated.
+       // If we want to show the success message again, we'd need the distance passed in or re-calculated.
+       // Let's assume the parent passes the whole address object including distance if needed, 
+       // but for simplicity, we just populate the text field.
+    }
+  }, [initialAddress])
+
 
   const handlePlaceChanged = () => {
     if (autocompleteRef.current) {
@@ -26,22 +40,30 @@ export default function DistanceCalculator() {
       if (place.geometry && place.geometry.location) {
         const lat = place.geometry.location.lat()
         const lng = place.geometry.location.lng()
-        setSelectedAddress(place.formatted_address || '')
+        const formattedAddress = place.formatted_address || ''
+        setSelectedAddress(formattedAddress)
         
         const dist = calculateHaversineDistance(TULSA_COORDS.lat, TULSA_COORDS.lng, lat, lng)
         
         if (dist > 40) {
           setError('We currently only service locations within 40 miles of Tulsa.')
           setDistance(null)
+          onAddressSelect({ address: formattedAddress, distance: dist, valid: false })
         } else {
           setDistance(dist)
           setError(null)
+          onAddressSelect({ address: formattedAddress, distance: dist, valid: true })
         }
       } else {
         console.warn("Place details not found or invalid.")
+        onAddressSelect({ valid: false })
       }
     }
   }
+  
+  // Trigger validation on mount if initial address exists and we want to restore state fully
+  // For now, we rely on user interaction or parent state. 
+  // If the parent says it's valid, we could pass `initialDistance` prop too to show the success message immediately.
 
   if (!isLoaded) return <div className="p-4">Loading Google Maps...</div>
 
@@ -72,6 +94,7 @@ export default function DistanceCalculator() {
                 <MapPin className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
                 <input
                   type="text"
+                  defaultValue={selectedAddress}
                   placeholder="Start typing an address..."
                   className="flex h-10 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 pl-9 text-sm placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:placeholder:text-zinc-400 dark:focus:ring-zinc-300"
                 />
@@ -110,7 +133,7 @@ export default function DistanceCalculator() {
                   </Text>
                 </div>
               </div>
-              <Button className="w-full font-semibold">Get My Instant Quote</Button>
+              {/* Button removed here as requested */}
             </div>
           </div>
         )}
