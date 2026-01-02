@@ -1,0 +1,45 @@
+@utility padding-global { padding-inline: var(--padding-global); }
+
+@utility padding-section-small { padding-block: var(--padding-section-small); }
+
+@utility padding-section-medium { padding-block: var(--padding-section-medium); }
+
+@utility padding-section-large { padding-block: var(--padding-section-large); }
+
+@utility container-small {
+  width: 100%;
+  max-width: var(--container-small);
+  margin-inline: auto;
+}
+
+@utility container-medium {
+  width: 100%;
+  max-width: var(--container-medium);
+  margin-inline: auto;
+}
+
+@utility container-large {
+  width: 100%;
+  max-width: var(--container-large);
+  margin-inline: auto;
+}
+
+@utility grid-fluid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: var(--spacing-medium);
+
+  @container (max-width: 28rem) {
+    gap: var(--spacing-small);
+  }
+}
+
+@utility container-root {
+  container-type: inline-size;
+}
+
+@utility glass {
+  background: color-mix(in oklch, var(--background), transparent 20%);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklch, var(--foreground), transparent 90%);
+}
