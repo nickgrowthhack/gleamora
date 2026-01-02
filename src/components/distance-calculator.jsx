@@ -49,7 +49,7 @@ export default function DistanceCalculator() {
     <div className="w-full max-w-md space-y-6 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       <div className="space-y-2">
         <Text variant="h3">See if we’re in your neighborhood</Text>
-        <Text variant="p" className="text-sm text-zinc-500 dark:text-zinc-400">
+        <Text variant="p" className="text-zinc-500 dark:text-zinc-400">
           We’re currently bringing our premium cleaning services to homes within 40 miles of Tulsa.
         </Text>
       </div>
