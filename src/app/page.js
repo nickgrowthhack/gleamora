@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DistanceCalculator from "@/components/distance-calculator";
 import { Section } from "@/components/ui/section";
+import { Text } from "@/components/ui/text";
 
 export default function Home() {
   return (
@@ -16,12 +17,12 @@ export default function Home() {
               height={20}
               priority
             />
-            <h1 className="text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+            <Text variant="h1" className="text-black dark:text-zinc-50">
               Address Distance Calculator
-            </h1>
-            <p className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
+            </Text>
+            <Text variant="p" className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
               Enter an address below to calculate its straight-line distance to Tulsa, OK.
-            </p>
+            </Text>
           </div>
           
           <DistanceCalculator />

@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
 import { MapPin } from 'lucide-react'
 import { calculateHaversineDistance } from '@/lib/utils'
+import { Text } from '@/components/ui/text'
 
 const TULSA_COORDS = { lat: 36.1540, lng: -95.9928 }
 const LIBRARIES = ['places']
@@ -38,17 +39,17 @@ export default function DistanceCalculator() {
   return (
     <div className="w-full max-w-md space-y-6 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold tracking-tight">Distance Calculator</h2>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <Text variant="h2">Distance Calculator</Text>
+        <Text variant="p" className="text-sm text-zinc-500 dark:text-zinc-400">
           Calculate the distance from Tulsa to any location.
-        </p>
+        </Text>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          <Text as="label" variant="h6" className="text-sm">
             Enter Address
-          </label>
+          </Text>
           <div className="relative">
             <Autocomplete
               onLoad={ref => autocompleteRef.current = ref}
@@ -76,17 +77,17 @@ export default function DistanceCalculator() {
         {distance !== null && (
           <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+              <Text as="span" variant="p" className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                 Distance to Tulsa
-              </span>
-              <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+              </Text>
+              <Text as="span" variant="h4" className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
                 {distance.toFixed(2)} miles
-              </span>
+              </Text>
             </div>
             {selectedAddress && (
-              <p className="mt-1 text-xs text-zinc-500 truncate" title={selectedAddress}>
+              <Text variant="p" className="mt-1 text-xs text-zinc-500 truncate" title={selectedAddress}>
                 {selectedAddress}
-              </p>
+              </Text>
             )}
           </div>
         )}
