@@ -18,10 +18,10 @@ export default function Home() {
               priority
             />
             <Text variant="h1" className="text-black dark:text-zinc-50">
-              Address Distance Calculator
+              Are we in your neighborhood?
             </Text>
             <Text variant="p" className="max-w-md text-lg text-zinc-600 dark:text-zinc-400">
-              Enter an address below to calculate its straight-line distance to Tulsa, OK.
+              We bring premium cleaning to homes within 40 miles of downtown Tulsa. Enter your address to see if you qualify for a spot.
             </Text>
           </div>
           

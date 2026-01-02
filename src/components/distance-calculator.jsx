@@ -47,16 +47,16 @@ export default function DistanceCalculator() {
   return (
     <div className="w-full max-w-md space-y-6 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       <div className="space-y-2">
-        <Text variant="h2">Distance Calculator</Text>
+        <Text variant="h2">See if we’re in your neighborhood</Text>
         <Text variant="p" className="text-sm text-zinc-500 dark:text-zinc-400">
-          Calculate the distance from Tulsa to any location.
+          We’re currently bringing our premium cleaning services to homes within 40 miles of Tulsa.
         </Text>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
           <Text as="label" variant="h6" className="text-sm">
-            Enter Address
+            Your Home Address
           </Text>
           <div className="relative">
             <Autocomplete
@@ -85,7 +85,7 @@ export default function DistanceCalculator() {
               <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <Text as="span" variant="p" className="text-sm font-medium text-red-800 dark:text-red-200">
-                  Location too far
+                  We're not there yet!
                 </Text>
                 <Text variant="p" className="text-xs text-red-600 dark:text-red-300">
                   {error}
