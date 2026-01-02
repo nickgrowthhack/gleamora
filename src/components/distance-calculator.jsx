@@ -1,9 +1,10 @@
 "use client"
 import { useState, useRef } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
-import { MapPin, AlertCircle } from 'lucide-react'
+import { MapPin, AlertCircle, CheckCircle } from 'lucide-react'
 import { calculateHaversineDistance } from '@/lib/utils'
 import { Text } from '@/components/ui/text'
+import { Button } from '@/components/ui/button'
 
 const TULSA_COORDS = { lat: 36.1540, lng: -95.9928 }
 const LIBRARIES = ['places']
@@ -96,20 +97,21 @@ export default function DistanceCalculator() {
         )}
 
         {distance !== null && (
-          <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900">
-            <div className="flex items-center justify-between">
-              <Text as="span" variant="p" className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                Distance to Tulsa
-              </Text>
-              <Text as="span" variant="h4" className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                {distance.toFixed(2)} miles
-              </Text>
+          <div className="rounded-lg bg-primary/5 p-4 dark:bg-primary/10">
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <Text as="span" variant="p" className="text-sm font-medium text-primary">
+                    Perfect! We service your area.
+                  </Text>
+                  <Text variant="p" className="text-xs text-muted-foreground">
+                    Your home in {selectedAddress.split(',')[0]} is within our priority service zone.
+                  </Text>
+                </div>
+              </div>
+              <Button className="w-full font-semibold">Get My Instant Quote</Button>
             </div>
-            {selectedAddress && (
-              <Text variant="p" className="mt-1 text-xs text-zinc-500 truncate" title={selectedAddress}>
-                {selectedAddress}
-              </Text>
-            )}
           </div>
         )}
       </div>
