@@ -1,7 +1,7 @@
 "use client"
 import { useState, useRef } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
-import { MapPin } from 'lucide-react'
+import { MapPin, AlertCircle } from 'lucide-react'
 import { calculateHaversineDistance } from '@/lib/utils'
 import { Text } from '@/components/ui/text'
 
@@ -15,6 +15,7 @@ export default function DistanceCalculator() {
   })
 
   const [distance, setDistance] = useState(null)
+  const [error, setError] = useState(null)
   const [selectedAddress, setSelectedAddress] = useState('')
   const autocompleteRef = useRef(null)
 
@@ -27,7 +28,14 @@ export default function DistanceCalculator() {
         setSelectedAddress(place.formatted_address || '')
         
         const dist = calculateHaversineDistance(TULSA_COORDS.lat, TULSA_COORDS.lng, lat, lng)
-        setDistance(dist)
+        
+        if (dist > 40) {
+          setError('We currently only service locations within 40 miles of Tulsa.')
+          setDistance(null)
+        } else {
+          setDistance(dist)
+          setError(null)
+        }
       } else {
         console.warn("Place details not found or invalid.")
       }
@@ -56,10 +64,7 @@ export default function DistanceCalculator() {
               onPlaceChanged={handlePlaceChanged}
               options={{
                 fields: ["geometry", "formatted_address"],
-                locationBias: { 
-                  center: TULSA_COORDS,
-                  radius: 50000 // 50km bias (approx 31 miles)
-                }
+                componentRestrictions: { country: "us" }
               }}
             >
               <div className="relative">
@@ -73,6 +78,22 @@ export default function DistanceCalculator() {
             </Autocomplete>
           </div>
         </div>
+
+        {error && (
+          <div className="rounded-lg bg-red-50 p-4 dark:bg-red-900/20">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <Text as="span" variant="p" className="text-sm font-medium text-red-800 dark:text-red-200">
+                  Location too far
+                </Text>
+                <Text variant="p" className="text-xs text-red-600 dark:text-red-300">
+                  {error}
+                </Text>
+              </div>
+            </div>
+          </div>
+        )}
 
         {distance !== null && (
           <div className="rounded-lg bg-zinc-100 p-4 dark:bg-zinc-900">
