@@ -3,6 +3,7 @@ import "@/tailwind/app.css";
 import { cn } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default async function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
         </ThemeProvider>
       </body>
