@@ -26,6 +26,11 @@ export default function Home() {
   });
   const [isStepValid, setIsStepValid] = useState(false);
 
+  // Scroll to top when step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
   // Re-validate when stepping into a new step to prevent invalid state
   useEffect(() => {
     if (step === 1) {
