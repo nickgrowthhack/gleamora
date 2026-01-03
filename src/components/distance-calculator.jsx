@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
 import { MapPin, AlertCircle, CheckCircle } from 'lucide-react'
 import { calculateHaversineDistance } from '@/lib/utils'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Text } from '@/components/ui/text'
 import { Button } from '@/components/ui/button'
 
@@ -90,15 +91,16 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
                 componentRestrictions: { country: "us" }
               }}
             >
-              <div className="relative">
-                <MapPin className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
-                <input
+              <InputGroup className="h-10 bg-white dark:bg-zinc-950">
+                <InputGroupAddon>
+                  <MapPin className="h-4 w-4 text-zinc-500" />
+                </InputGroupAddon>
+                <InputGroupInput
                   type="text"
                   defaultValue={selectedAddress}
                   placeholder="Start typing an address..."
-                  className="flex h-10 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 pl-9 text-sm placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:placeholder:text-zinc-400 dark:focus:ring-zinc-300"
                 />
-              </div>
+              </InputGroup>
             </Autocomplete>
           </div>
         </div>
