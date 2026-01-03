@@ -6,9 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import { Home, Building2, Building, LayoutTemplate, Caravan } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const ServiceDetails = ({ data, updateData }) => {
+const ServiceDetails = ({ data, updateData, priceData }) => {
   const handleServiceTypeChange = (value) => {
     if (value) updateData({ ...data, serviceType: value });
+  };
+
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(value);
   };
 
   const handleResidenceChange = (value) => {
@@ -263,6 +270,31 @@ const ServiceDetails = ({ data, updateData }) => {
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
+
+      {/* Price Summary Footer */}
+      {priceData && (
+        <div className="mt-8 pt-6 border-t border-gray-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="flex flex-col space-y-2">
+            <div className="flex justify-between items-end">
+              <span className="text-gray-600 font-medium">Estimated Total</span>
+              <div className="text-right">
+                {priceData.discountAmount > 0 && (
+                   <span className="text-sm text-gray-400 line-through mr-2">
+                     {formatCurrency(priceData.originalPrice)}
+                   </span>
+                )}
+                <span className="text-2xl font-bold text-primary transition-all duration-300 ease-in-out">
+                  {formatCurrency(priceData.finalPrice)}
+                </span>
+              </div>
+            </div>
+            
+            <p className="text-xs text-gray-400 text-right transition-opacity duration-300">
+               Based on {priceData.details.bedrooms || 0} bedrooms, {priceData.details.bathrooms || 0} bathrooms, and {priceData.details.sqFt || 300} Sq Ft
+            </p>
+          </div>
+        </div>
+       )}
     </div>
   );
 };

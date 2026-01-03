@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import DistanceCalculator from "@/components/distance-calculator";
 import ServiceDetails from "@/components/service-details";
 import Schedule from "@/components/schedule";
 import { Section } from "@/components/ui/section";
+import { calculatePrice } from "@/lib/pricing";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +38,10 @@ export default function Home() {
         setIsStepValid(!!formData.schedule?.date);
     }
   }, [step, formData]);
+
+  const priceData = useMemo(() => {
+      return calculatePrice(formData.serviceDetails);
+  }, [formData.serviceDetails]);
 
 
   const nextStep = () => {
@@ -126,6 +131,7 @@ export default function Home() {
                 <ServiceDetails 
                     data={formData.serviceDetails} 
                     updateData={handleServiceDetailsUpdate} 
+                    priceData={priceData}
                 />
             )}
             
