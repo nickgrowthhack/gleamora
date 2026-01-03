@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle"
+// import { ModeToggle } from "@/components/mode-toggle"
 import { Logo } from "@/components/ui/logo"
 
 export function Header() {
@@ -7,7 +7,7 @@ export function Header() {
       <div className="container flex h-14 items-center justify-between padding-global">
         <Logo className="h-8 w-8 text-foreground hover:text-primary transition-colors" />
         <div className="flex items-center gap-2">
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </div>
       </div>
     </header>

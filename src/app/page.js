@@ -149,7 +149,7 @@ export default function Home() {
                 Back
             </Button>
             
-            <Button onClick={nextStep} disabled={!isStepValid}>
+            <Button onClick={nextStep} disabled={!isStepValid || step === 2}>
                 {step === 1 ? "Get My Instant Quote" : step === 3 ? "Finish" : "Next"}
             </Button>
         </div>
