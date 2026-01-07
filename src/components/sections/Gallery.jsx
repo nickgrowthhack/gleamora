@@ -44,7 +44,7 @@ const galleryImages = [
 
 export function Gallery() {
   return (
-    <Section className="bg-muted/30" padding="large">
+    <Section id="gallery" className="bg-muted/30" padding="large">
       <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Work Gallery</h2>
         <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
