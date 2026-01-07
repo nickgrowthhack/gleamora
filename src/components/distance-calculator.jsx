@@ -37,22 +37,22 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
   const handlePlaceChanged = () => {
     if (autocompleteRef.current) {
       const place = autocompleteRef.current.getPlace()
-      if (place.geometry && place.geometry.location) {
-        const lat = place.geometry.location.lat()
-        const lng = place.geometry.location.lng()
-        const formattedAddress = place.formatted_address || ''
+      const locationData = GoogleMapsService.extractLocationData(place)
+
+      if (locationData) {
+        const { lat, lng, formattedAddress } = locationData
         setSelectedAddress(formattedAddress)
         
-        const dist = calculateHaversineDistance(TULSA_COORDS.lat, TULSA_COORDS.lng, lat, lng)
+        const { isServiceable, distance, error } = GoogleMapsService.checkServiceAvailability(lat, lng)
         
-        if (dist > 40) {
-          setError('We currently only service locations within 40 miles of Tulsa.')
+        if (!isServiceable) {
+          setError(error)
           setDistance(null)
-          onAddressSelect({ address: formattedAddress, distance: dist, valid: false })
+          onAddressSelect({ address: formattedAddress, distance: distance, valid: false })
         } else {
-          setDistance(dist)
+          setDistance(distance)
           setError(null)
-          onAddressSelect({ address: formattedAddress, distance: dist, valid: true })
+          onAddressSelect({ address: formattedAddress, distance: distance, valid: true })
         }
       } else {
         console.warn("Place details not found or invalid.")
