@@ -167,6 +167,7 @@ export default function Home() {
 
       </Section>
       <Gallery />
+      <AboutUs />
     </div>
   );
 }

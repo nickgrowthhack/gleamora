@@ -2,7 +2,7 @@ import { Section } from "@/components/ui/section";
 
 export function AboutUs() {
   return (
-    <Section padding="large" className="bg-background">
+    <Section padding="small" container="large">
       <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-4xl mx-auto">
         <div className="space-y-4">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
