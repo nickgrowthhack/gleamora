@@ -2,19 +2,18 @@
 import { useState, useRef, useEffect } from 'react'
 import { useLoadScript, Autocomplete } from '@react-google-maps/api'
 import { MapPin, AlertCircle, CheckCircle } from 'lucide-react'
-import { calculateHaversineDistance } from '@/lib/utils'
+import { GoogleMapsService, GOOGLE_MAPS_LIBRARIES } from '@/services/external'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Text } from '@/components/ui/text'
 import { Button } from '@/components/ui/button'
 
-const TULSA_COORDS = { lat: 36.1540, lng: -95.9928 }
-const LIBRARIES = ['places']
 
 export default function DistanceCalculator({ onAddressSelect, initialAddress }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: LIBRARIES
+    libraries: GOOGLE_MAPS_LIBRARIES
   })
+
 
   const [distance, setDistance] = useState(null)
   const [error, setError] = useState(null)

@@ -5,7 +5,7 @@ import DistanceCalculator from "@/components/distance-calculator";
 import ServiceDetails from "@/components/service-details";
 import Schedule from "@/components/schedule";
 import { Section } from "@/components/ui/section";
-import { calculatePrice } from "@/lib/pricing";
+import { PricingService } from "@/services/core";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -45,7 +45,11 @@ export default function Home() {
   }, [step, formData]);
 
   const priceData = useMemo(() => {
-      return calculatePrice(formData.serviceDetails);
+    try {
+      return PricingService.calculate(formData.serviceDetails);
+    } catch (error) {
+      return null;
+    }
   }, [formData.serviceDetails]);
 
 
