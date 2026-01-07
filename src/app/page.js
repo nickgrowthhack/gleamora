@@ -6,6 +6,8 @@ import ServiceDetails from "@/components/service-details";
 import Schedule from "@/components/schedule";
 import { Section } from "@/components/ui/section";
 import { PricingService } from "@/services/core";
+import { Gallery } from "@/components/sections/Gallery";
+import { AboutUs } from "@/components/sections/AboutUs";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -164,6 +166,7 @@ export default function Home() {
         </div>
 
       </Section>
+      <Gallery />
     </div>
   );
 }
