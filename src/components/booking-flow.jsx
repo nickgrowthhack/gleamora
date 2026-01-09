@@ -7,6 +7,7 @@ import DistanceCalculator from '@/components/distance-calculator'
 import Schedule from '@/components/schedule'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, Check, Calendar, MapPin, Sparkles, X } from 'lucide-react'
+import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { cn } from "@/lib/utils"
 
 export default function BookingFlow({ 
@@ -204,7 +205,7 @@ export default function BookingFlow({
                 className="flex-1"
             >
                 {step === 3 ? "Complete" : "Next"}
-                {step === 3 ? <Check className="w-4 h-4 ml-2" /> : <ChevronRight className="w-4 h-4 ml-2" />}
+                {step === 3 ? <Check className="w-4 h-4 ml-2" /> : <ArrowRightIcon className="w-4 h-4 ml-2" />}
             </Button>
         </div>
       </div>

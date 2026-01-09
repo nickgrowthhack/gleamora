@@ -18,6 +18,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 export default function Home() {
   const [step, setStep] = useState(1);
@@ -162,7 +163,8 @@ export default function Home() {
             </Button>
             
             <Button onClick={nextStep} disabled={!isStepValid || step === 2}>
-                {step === 1 ? "Get My Instant Quote" : step === 3 ? "Finish" : "Next"}
+                {step === 3 ? "Finish" : "Next"}
+                {step !== 3 && <ArrowRightIcon className="w-4 h-4 ml-2" />}
             </Button>
         </div>
 
