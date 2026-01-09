@@ -111,13 +111,13 @@ export default function BookingFlow({
     <div 
         id="booking-flow-container"
         className={cn(
-            "w-full flex flex-col items-center gap-8",
+            "w-full flex flex-col items-center gap-4",
             className
         )}
     >
       
       {/* Breadcrumb Navigation */}
-      <div className="w-full flex justify-center py-4">
+      <div className="w-full flex justify-center py-2">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -158,7 +158,7 @@ export default function BookingFlow({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full min-h-[400px]">
+      <div className="flex-1 flex flex-col items-center justify-center w-full min-h-[300px]">
         {step === 1 && (
             <div className="flex justify-center w-full animate-in fade-in slide-in-from-right-4 duration-300">
                 <DistanceCalculator 
@@ -190,7 +190,7 @@ export default function BookingFlow({
       </div>
 
       {/* Footer Navigation */}
-      <div className="flex justify-center gap-4 mt-8 pb-8 w-full">
+      <div className="flex justify-center gap-4 mt-2 pb-4 w-full">
           <Button 
             variant="outline" 
             onClick={handleBack} 
