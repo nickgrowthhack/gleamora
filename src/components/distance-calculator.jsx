@@ -5,34 +5,22 @@ import { MapPin, AlertCircle, CheckCircle } from 'lucide-react'
 import { GoogleMapsService, GOOGLE_MAPS_LIBRARIES } from '@/services/external'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Text } from '@/components/ui/text'
-import { Button } from '@/components/ui/button'
 
-
-export default function DistanceCalculator({ onAddressSelect, initialAddress }) {
+export default function DistanceCalculator({ address, distance, onAddressSelect }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: GOOGLE_MAPS_LIBRARIES
   })
 
-
-  const [distance, setDistance] = useState(null)
   const [error, setError] = useState(null)
-  const [selectedAddress, setSelectedAddress] = useState(initialAddress || '')
   const autocompleteRef = useRef(null)
 
-  // Validate initial address if provided
+  // Sync internal error state if distance is valid (reset error)
   useEffect(() => {
-    if (initialAddress) {
-       setSelectedAddress(initialAddress)
-       // We don't re-calculate distance here as we assume if it's passed back it was valid, 
-       // or we could store distance in parent too. 
-       // For now, let's just ensure the input is populated.
-       // If we want to show the success message again, we'd need the distance passed in or re-calculated.
-       // Let's assume the parent passes the whole address object including distance if needed, 
-       // but for simplicity, we just populate the text field.
+    if (distance !== null) {
+      setError(null);
     }
-  }, [initialAddress])
-
+  }, [distance]);
 
   const handlePlaceChanged = () => {
     if (autocompleteRef.current) {
@@ -41,29 +29,29 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
 
       if (locationData) {
         const { lat, lng, formattedAddress } = locationData
-        setSelectedAddress(formattedAddress)
         
-        const { isServiceable, distance, error } = GoogleMapsService.checkServiceAvailability(lat, lng)
+        const { isServiceable, distance: calcDistance, error: serviceError } = GoogleMapsService.checkServiceAvailability(lat, lng)
         
         if (!isServiceable) {
-          setError(error)
-          setDistance(null)
-          onAddressSelect({ address: formattedAddress, distance: distance, valid: false })
+          setError(serviceError)
+          onAddressSelect({ address: formattedAddress, distance: null, valid: false })
         } else {
-          setDistance(distance)
           setError(null)
-          onAddressSelect({ address: formattedAddress, distance: distance, valid: true })
+          onAddressSelect({ address: formattedAddress, distance: calcDistance, valid: true })
         }
       } else {
         console.warn("Place details not found or invalid.")
-        onAddressSelect({ valid: false })
+        onAddressSelect({ address: '', distance: null, valid: false })
       }
     }
   }
   
-  // Trigger validation on mount if initial address exists and we want to restore state fully
-  // For now, we rely on user interaction or parent state. 
-  // If the parent says it's valid, we could pass `initialDistance` prop too to show the success message immediately.
+  const handleInputChange = (e) => {
+      // Just update the text, but validity is lost until selected from map or re-validated
+      // However, Google Autocomplete is tricky with controlled inputs.
+      // We often just let the parent know the text changed, but validity is false.
+      onAddressSelect({ address: e.target.value, distance: null, valid: false })
+  }
 
   if (!isLoaded) return <div className="p-4">Loading Google Maps...</div>
 
@@ -96,7 +84,8 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
                 </InputGroupAddon>
                 <InputGroupInput
                   type="text"
-                  defaultValue={selectedAddress}
+                  value={address || ''}
+                  onChange={handleInputChange}
                   placeholder="Start typing an address..."
                 />
               </InputGroup>
@@ -120,7 +109,7 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
           </div>
         )}
 
-        {distance !== null && (
+        {distance !== null && !error && address && (
           <div className="rounded-lg bg-primary/5 p-4 dark:bg-primary/10">
             <div className="space-y-4">
               <div className="flex items-start gap-3">
@@ -130,11 +119,10 @@ export default function DistanceCalculator({ onAddressSelect, initialAddress }) 
                     Perfect! We service your area.
                   </Text>
                   <Text variant="p" className="text-xs text-muted-foreground">
-                    Your home in {selectedAddress.split(',')[0]} is within our priority service zone.
+                    Your home in {address.split(',')[0]} is within our priority service zone.
                   </Text>
                 </div>
               </div>
-              {/* Button removed here as requested */}
             </div>
           </div>
         )}
