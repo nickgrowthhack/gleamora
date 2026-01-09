@@ -28,35 +28,42 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between padding-global">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-8 w-8 text-foreground hover:text-primary transition-colors" />
-        </Link>
+        {/* Left Section: Logo + Desktop Nav */}
+        <div className="flex items-center gap-10">
+          <Link href="/" aria-label="Home">
+            <Logo className="h-8 w-8 text-foreground hover:text-primary transition-colors" />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
-          <NavigationMenu>
-            <NavigationMenuList>
-              {NAV_ITEMS.map((item) => (
-                <NavigationMenuItem key={item.href}>
-                  <NavigationMenuLink asChild>
-                    <Link href={item.href} className={navigationMenuTriggerStyle()}>
-                      {item.label}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-          
-          <div className="flex items-center gap-2">
-            {/* <ModeToggle /> */}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {NAV_ITEMS.map((item) => (
+                  <NavigationMenuItem key={item.href}>
+                    <NavigationMenuLink asChild>
+                      <Link href={item.href} className={navigationMenuTriggerStyle()}>
+                        {item.label}
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+            
+            <div className="flex items-center gap-2">
+              {/* <ModeToggle /> */}
+            </div>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="flex md:hidden items-center gap-2">
-           {/* <ModeToggle /> */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        {/* Right Section: CTA + Mobile Nav */}
+        <div className="flex items-center gap-4">
+          <Button className="hidden md:flex">Get My Instant Quote</Button>
+
+          {/* Mobile Navigation */}
+          <div className="flex md:hidden items-center gap-2">
+             {/* <ModeToggle /> */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
@@ -82,6 +89,7 @@ export function Header() {
             </SheetContent>
           </Sheet>
         </div>
+      </div>
       </div>
     </header>
   )
