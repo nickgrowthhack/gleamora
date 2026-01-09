@@ -6,7 +6,7 @@ import { Menu } from "lucide-react"
 import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/config/nav"
-// import { ModeToggle } from "@/components/mode-toggle"
+// import { ModeToggle } from "@/components/layout/mode-toggle"
 import {
   NavigationMenu,
   NavigationMenuItem,

@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/tailwind/app.css";
 import { cn } from "@/lib/utils";
 import { cookies } from "next/headers";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
