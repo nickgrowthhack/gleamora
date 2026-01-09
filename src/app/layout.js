@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/sections/Footer";
+import { Footer } from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

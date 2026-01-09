@@ -1,4 +1,6 @@
+import Link from "next/link"
 import { Logo } from "@/components/ui/logo"
+import { NAV_ITEMS } from "@/config/nav"
 
 export function Footer() {
   return (
@@ -10,7 +12,18 @@ export function Footer() {
             © {new Date().getFullYear()} Gleamora. All rights reserved.
           </p>
         </div>
-        <div className="flex gap-4">
+        
+        <div className="flex gap-4 items-center">
+            {NAV_ITEMS.map((item) => (
+                <Link 
+                    key={item.href} 
+                    href={item.href}
+                    className="text-sm font-medium hover:underline underline-offset-4"
+                >
+                    {item.label}
+                </Link>
+            ))}
+            <div className="h-4 w-px bg-border hidden md:block" />
             <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Terms</a>
             <a href="#" className="text-sm font-medium hover:underline underline-offset-4">Privacy</a>
         </div>
