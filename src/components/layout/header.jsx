@@ -6,6 +6,7 @@ import { Menu } from "lucide-react"
 import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/config/nav"
+import { BookingModal } from "@/components/booking-modal"
 // import { ModeToggle } from "@/components/layout/mode-toggle"
 import {
   NavigationMenu,
@@ -58,7 +59,9 @@ export function Header() {
 
         {/* Right Section: CTA + Mobile Nav */}
         <div className="flex items-center gap-4">
-          <Button className="hidden md:flex">Get My Instant Quote</Button>
+          <BookingModal>
+            <Button className="hidden md:flex">Get My Instant Quote</Button>
+          </BookingModal>
 
           {/* Mobile Navigation */}
           <div className="flex md:hidden items-center gap-2">
