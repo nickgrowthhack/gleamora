@@ -3,15 +3,15 @@ import { Section } from "@/components/ui/section";
 export function AboutUs() {
   return (
     <Section id="about-us" padding="small" container="large">
-      <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-4xl mx-auto">
-        <div className="space-y-4">
+      <div className="flex flex-col md:flex-row items-start justify-between gap-12 text-left">
+        <div className="space-y-4 md:w-1/3">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
           <p className="text-xl text-muted-foreground font-medium">
             At Gleamora Cleaning, we believe a truly clean home transforms your life.
           </p>
         </div>
         
-        <div className="space-y-6 text-muted-foreground leading-relaxed text-lg text-left">
+        <div className="space-y-6 md:w-2/3 text-muted-foreground leading-relaxed text-lg">
           <p>
             We have been committed to delivering a superior level of cleanliness and professionalism to the Tulsa, OK community.
           </p>
