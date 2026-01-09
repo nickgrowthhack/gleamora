@@ -132,8 +132,9 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row gap-12 lg:items-center w-full justify-center">
 
                   <DistanceCalculator 
+                    address={formData.address?.address}
+                    distance={formData.address?.distance}
                     onAddressSelect={handleAddressSelect} 
-                    initialAddress={formData.address?.address}
                   />
                 </div>
             )}
