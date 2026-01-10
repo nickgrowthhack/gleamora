@@ -4,7 +4,7 @@ import BookingFlow from "@/components/booking-flow";
 
 export function Hero() {
   return (
-    <Section id="hero-section" padding="medium" container="large" className="relative overflow-hidden isolate pt-32">
+    <Section id="hero-section" padding="large" container="large" className="relative overflow-hidden isolate">
       {/* Background Decorator - Primary Blob (Moved to Top Right) */}
       <div 
         aria-hidden="true" 
@@ -32,8 +32,8 @@ export function Hero() {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start lg:items-center relative z-10">
-        <div className="flex flex-col gap-6">
+      <div className="flex flex-col lg:flex-row lg:justify-between gap-4 items-start lg:items-center relative z-10">
+        <div className="flex flex-col gap-6 lg:max-w-2xl">
           <Text variant="h1">
             Experience the Ultimate Clean
           </Text>
@@ -41,7 +41,7 @@ export function Hero() {
             Professional cleaning services tailored to your needs. Book your trusted cleaner in minutes with our easy-to-use platform.
           </Text>
         </div>
-        <div className="w-full">
+        <div className="w-full lg:w-[500px] shrink-0">
           <BookingFlow />
         </div>
       </div>
