@@ -87,7 +87,7 @@ export default function DistanceCalculator({ address, distance, onAddressSelect 
                   type="text"
                   value={address || ''}
                   onChange={handleInputChange}
-                  placeholder="Start typing an address..."
+                  placeholder="Start typing your address..."
                 />
               </InputGroup>
             </Autocomplete>

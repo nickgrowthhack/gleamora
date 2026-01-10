@@ -4,7 +4,7 @@ import BookingFlow from "@/components/booking-flow";
 
 export function Hero() {
   return (
-    <Section id="hero-section" padding="medium" container="large" className="relative overflow-hidden isolate">
+    <Section id="hero-section" padding="medium" container="large" className="relative overflow-hidden isolate pt-32">
       {/* Background Decorator - Primary Blob (Moved to Top Right) */}
       <div 
         aria-hidden="true" 
