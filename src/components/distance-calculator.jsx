@@ -83,6 +83,7 @@ export default function DistanceCalculator({ address, distance, onAddressSelect 
                   <MapPin className="h-4 w-4 text-zinc-500" />
                 </InputGroupAddon>
                 <InputGroupInput
+                  id="hero-address-input"
                   type="text"
                   value={address || ''}
                   onChange={handleInputChange}
