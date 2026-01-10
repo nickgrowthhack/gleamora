@@ -17,28 +17,32 @@ import {
 
 const galleryImages = [
   {
-    src: "https://images.unsplash.com/photo-1581578731117-104f2a8d275d?q=80&w=1920&auto=format&fit=crop",
-    alt: "Living room cleaning",
+    src: "/images/gallery/1.jpg",
+    alt: "Gleamora cleaning service result 1",
   },
   {
-    src: "https://images.unsplash.com/photo-1527513913470-4e5c91dd7e8d?q=80&w=1920&auto=format&fit=crop",
-    alt: "Kitchen deep clean",
+    src: "/images/gallery/2.jpg",
+    alt: "Gleamora cleaning service result 2",
   },
   {
-    src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920&auto=format&fit=crop",
-    alt: "Bathroom sparkling clean",
+    src: "/images/gallery/3.jpg",
+    alt: "Gleamora cleaning service result 3",
   },
   {
-    src: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1920&auto=format&fit=crop",
-    alt: "Bedroom organization",
+    src: "/images/gallery/4.jpg",
+    alt: "Gleamora cleaning service result 4",
   },
   {
-    src: "https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=1920&auto=format&fit=crop",
-    alt: "Window cleaning service",
+    src: "/images/gallery/5.jpg",
+    alt: "Gleamora cleaning service result 5",
   },
   {
-    src: "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=1920&auto=format&fit=crop",
-    alt: "Office cleaning",
+    src: "/images/gallery/6.jpg",
+    alt: "Gleamora cleaning service result 6",
+  },
+  {
+    src: "/images/gallery/7.jpg",
+    alt: "Gleamora cleaning service result 7",
   },
 ]
 
