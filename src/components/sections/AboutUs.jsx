@@ -4,28 +4,21 @@ export function AboutUs() {
   return (
     <Section id="about-us" padding="small" container="large">
       <div className="flex flex-col md:flex-row items-start justify-between gap-12 text-left">
-        <div className="space-y-4 md:w-1/3">
+        <div className="md:w-1/3">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
-          <p className="text-xl text-muted-foreground font-medium">
-            At Gleamora Cleaning, we believe a truly clean home transforms your life.
-          </p>
         </div>
         
         <div className="space-y-6 md:w-2/3 text-muted-foreground leading-relaxed text-lg">
           <p>
-            We have been committed to delivering a superior level of cleanliness and professionalism to the Tulsa, OK community.
+            At Gleamora Cleaning, we believe a truly clean home transforms your life. We are committed to delivering superior cleanliness and professionalism to the Tulsa, OK community.
           </p>
           
           <p>
-            We offer a full spectrum of home cleaning solutions, perfectly tailored for modern life. Our expertise covers premium house cleaning, specialized carpet and upholstery renewal, detailed move-in/out services, and making Airbnb properties consistently guest-ready. We don’t just clean surfaces; we create beautifully organized and sanitized spaces with unmatched attention to detail.
+            We offer premium house cleaning, carpet renewal, and move-in/out services, tailored for modern life. Our eco-friendly products and professional team ensure your space is beautifully organized and sanitized.
           </p>
           
           <p>
-            What sets us apart? It’s our passion for people and planet. We combine eco-friendly cleaning products with highly efficient processes, all powered by our professional, fully vetted team. We pride ourselves on transparent pricing, flexible scheduling to fit your busy life, and a commitment to communication that makes booking effortless.
-          </p>
-          
-          <p className="font-semibold text-foreground">
-            For busy families, ambitious professionals, and savvy rental owners across Tulsa, we are more than just a cleaning service—we are your partner in maximizing comfort and reclaiming your free time.
+            We are more than just a cleaning service—we are your partner in reclaiming your free time.
           </p>
         </div>
       </div>
