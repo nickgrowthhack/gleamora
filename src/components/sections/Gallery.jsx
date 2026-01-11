@@ -48,12 +48,10 @@ const galleryImages = [
 
 export function Gallery() {
   return (
-    <Section id="gallery" className="bg-muted/30" padding="large">
-      <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Work Gallery</h2>
-        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          See the sparkling results of our professional cleaning services.
-        </p>
+    <Section padding="medium" container="large" id="gallery" className="bg-muted/30">
+      <div className="flex flex-col items-start space-y-4 text-left mb-12">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Gallery</h2>
+
       </div>
       
       <Carousel
@@ -61,7 +59,7 @@ export function Gallery() {
           align: "start",
           loop: true,
         }}
-        className="w-full max-w-5xl mx-auto"
+        className="w-full"
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           {galleryImages.map((image, index) => (
@@ -99,8 +97,8 @@ export function Gallery() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden md:flex -left-12" />
-        <CarouselNext className="hidden md:flex -right-12" />
+        <CarouselPrevious className="flex left-2 md:-left-12 bg-background/80 hover:bg-background" />
+        <CarouselNext className="flex right-2 md:-right-12 bg-background/80 hover:bg-background" />
       </Carousel>
     </Section>
   )
