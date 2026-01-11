@@ -10,8 +10,8 @@ export default function Home() {
     <div className="flex flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <Hero />
       <Benefits />
-      <Gallery />
       <AboutUs />
+      <Gallery />
     </div>
   );
 }
